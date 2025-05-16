@@ -7,12 +7,19 @@ const showMoreButtonEl = document.getElementById("show-more-button");
 
 
 let page = 1;   
+
+
 async function get_photos(){
     const search_term = search_inputEL.value;
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${search_term}&client_id=${access_key}`;
     const response = await fetch(url);
     const data = await response.json();
     const results = data.results;
+
+    if (page === 1) {
+    resultdiv.innerHTML = "";
+    }
+
     results.map((result) => {
         const imagewrapper = document.createElement("div");
         imagewrapper.classList.add("search-result");
